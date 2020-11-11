@@ -20,7 +20,7 @@ struct KS // Компрессорная станция
 	int effect; // Эффективность
 };
 template <typename T>
-T getint(string text, T border1, T border2 = 100)
+T getint(string text, T border1, T border2 = 10000)
 {
 	T value;
 	while (1)
