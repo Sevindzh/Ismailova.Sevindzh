@@ -4,10 +4,13 @@
 #include <vector>
 #include "KS.h"
 #include "Truba.h"
+#include "ut.h"
+#include "KS.cpp"
+#include "Truba.cpp"
 
 using namespace std;
 
-/*struct Truba//Труба
+/* struct Truba//Труба
 {
 	string id; // Идентификатор
 	double dlina; // Длина
@@ -22,10 +25,10 @@ struct KS // Компрессорная станция
 	int N; // Количество цехов
 	int Ninwork; // Количсевто цехов в работе
 	int effect; // Эффективность
-};*/
+};
 
 template <typename T>
-T getint(string text, T border1, T border2 = 10000)
+T getint(string text, T border1, T border2)
 {
 	T value;
 	while (1)
@@ -49,8 +52,8 @@ Truba createTruba() // Создание трубы
 {
 	Truba t;
 	t.id = "1";
-	t.dlina = getint("Введи длину трубы (Еденица измерения: м)", 1.0);
-	t.diametr = getint("Введи диаметр трубы(Еденица измерения : мм)", 1);
+	t.dlina = getint("Введи длину трубы (Еденица измерения: м)", 1.0,10000.0);
+	t.diametr = getint("Введи диаметр трубы(Еденица измерения : мм)", 1,10000);
 	t.sostoyanie = false;
 	return t;
 }
@@ -60,9 +63,9 @@ KS createKS() // Создание компрессорной станции
 	cout << "Введи имя компрессорной станции\n";
 	cin.get();
 	getline(cin, ks.name);
-	ks.N = getint("Введи количество цехов", 1);
+	ks.N = getint("Введи количество цехов", 1,10000);
 	ks.Ninwork = getint("Введи количество цехов в работе", 0, ks.N);
-	ks.effect = getint("Введи эффективность компрессорной станцции (Эффективность измеряется по 10-ти бальной шкале)", 0);
+	ks.effect = getint("Введи эффективность компрессорной станцции (Эффективность измеряется по 10-ти бальной шкале)", 0,10000);
 	return ks;
 }
 void printTruba(const Truba& t) // Вывод информации о трубе
@@ -119,16 +122,29 @@ KS inputfileKS(ifstream& fin) // Считывание информации о компрессорной станции
 	fin >> ks.Ninwork;
 	fin >> ks.effect;
 	return ks;
-}
+} */
+
 Truba& selectTruba(vector<Truba>& Truboprovod)
 {
-	unsigned int index = getint("Введите номер трубы", 1u, Truboprovod.size());
+	unsigned int index = getint("Введите номер трубы", (size_t)1u, Truboprovod.size());
 	return Truboprovod[index - 1];
 }
 KS& selectKS(vector<KS>& Zavod)
 {
-	unsigned int index = getint("Введи номер компрессорной станции", 1u, Zavod.size());
+	unsigned int index = getint("Введи номер компрессорной станции", (size_t)1u, Zavod.size());
 	return Zavod[index - 1];
+}
+
+void deleteTruba(vector<Truba>& Truboprovod)
+{
+	unsigned int index = getint("Введите номер трубы", (size_t)1u, Truboprovod.size());
+	Truboprovod.erase(Truboprovod.begin() + index - 1);
+}
+
+void deleteKS(vector<KS>& Zavod)
+{
+	unsigned int index = getint("Введите номер трубы", (size_t)1u, Zavod.size());
+	Zavod.erase(Zavod.begin() + index - 1);
 }
 void printmenu()
 {
@@ -139,6 +155,8 @@ void printmenu()
 	cout << "5-Редактировать колличество цехов в работе компрессорной станции\n";
 	cout << "6-Сохранить данные файл\n";
 	cout << "7-Считать данные из файла\n";
+	cout << "8-Удалить трубу\n";
+	cout << "9-Удалить компрессорную станцию\n";
 	cout << "0-Выход\n";
 }
 int main()
@@ -150,7 +168,7 @@ int main()
 	{
 		printmenu();
 		int i;
-		i = getint("Введи номер действия", 0);
+		i = getint("Введи номер действия", 0,10000);
 		switch (i)
 		{
 		case 1:
@@ -169,7 +187,10 @@ int main()
 			{
 				if (Truboprovod.size() > 0)
 				{
-					printTruba(selectTruba(Truboprovod));
+					for (const auto& infoTruba : Truboprovod);
+						{
+							printTruba(infoTruba);
+						}
 				}
 				else
 				{
@@ -177,7 +198,11 @@ int main()
 				}
 				if (Zavod.size() > 0)
 				{
-					printKS(selectKS(Zavod));
+					for (const auto& infoKS : Zavod);
+					{
+						printKS(infoKS);
+					}
+
 				}
 				else
 				{
@@ -230,14 +255,14 @@ int main()
 					fout << Zavod.size() << endl;
 					if (Truboprovod.size() > 0)
 					{
-						for (Truba infotruba : Truboprovod)
+						for (const auto& infoTruba : Truboprovod)
 						{
-							savefileTruba(fout, infotruba);
+							savefileTruba(fout, infoTruba);
 						}
 					}
 					if (Zavod.size() > 0)
 					{
-						for (KS infoKS : Zavod)
+						for (const auto& infoKS : Zavod)
 						{
 							savefileKS(fout, infoKS);
 						}
@@ -280,7 +305,18 @@ int main()
 						Zavod.push_back(infoKS);
 					}
 				}
+				fin.close();
 			}
+			break;
+		}
+		case 8:
+		{
+			deleteTruba(Truboprovod);
+			break;
+		}
+		case 9:
+		{
+			deleteKS(Zavod);
 			break;
 		}
 		case 0:
