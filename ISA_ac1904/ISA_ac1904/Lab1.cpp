@@ -2,8 +2,12 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "KS.h"
+#include "Truba.h"
+
 using namespace std;
-struct Truba//Труба
+
+/*struct Truba//Труба
 {
 	string id; // Идентификатор
 	double dlina; // Длина
@@ -18,7 +22,8 @@ struct KS // Компрессорная станция
 	int N; // Количество цехов
 	int Ninwork; // Количсевто цехов в работе
 	int effect; // Эффективность
-};
+};*/
+
 template <typename T>
 T getint(string text, T border1, T border2 = 10000)
 {
@@ -40,7 +45,7 @@ T getint(string text, T border1, T border2 = 10000)
 	}
 
 }
-Truba creatTruba() // Создание трубы
+Truba createTruba() // Создание трубы
 {
 	Truba t;
 	t.id = "1";
@@ -49,7 +54,7 @@ Truba creatTruba() // Создание трубы
 	t.sostoyanie = false;
 	return t;
 }
-KS creatKS() // Создание компрессорной станции
+KS createKS() // Создание компрессорной станции
 {
 	KS ks;
 	cout << "Введи имя компрессорной станции\n";
@@ -150,12 +155,12 @@ int main()
 		{
 		case 1:
 		{
-			Truboprovod.push_back(creatTruba());
+			Truboprovod.push_back(createTruba());
 			break;
 		}
 		case 2:
 		{
-			Zavod.push_back(creatKS());
+			Zavod.push_back(createKS());
 			break;
 		}
 		case 3:
@@ -267,7 +272,7 @@ int main()
 						Truboprovod.push_back(infotruba);
 					}
 				}
-				if (countks)
+				if (countks > 0)
 				{
 					while (countks--)
 					{
