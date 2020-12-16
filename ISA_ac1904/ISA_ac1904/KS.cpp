@@ -26,6 +26,7 @@ ostream& operator << (ostream& out, const KS& ks) // Вывод информации о компресс
 	out << "Количество цехов на компрессорной станции: " << ks.N << endl;
 	out << "Количество цехов в работе: " << ks.Ninwork << endl;
 	out << "Эффективность компрессорной станции: " << ks.effect << endl;
+	return out;
 }
 
 void KS::editKS() // Изменение цехов в работе

@@ -5,8 +5,6 @@
 #include "KS.h"
 #include "Truba.h"
 #include "ut.h"
-#include "KS.cpp"
-#include "Truba.cpp"
 
 using namespace std;
 
@@ -51,7 +49,7 @@ bool SearchKSByName(const KS& ks, std::string parametr) // Поиск по имени
 
 bool SearchKSByNnowork(const KS& ks, double parametr) // не работающих
 {
-	return (1.0 - ((double)ks.Ninwork / ks.N)) >= parametr/100.0);
+	return ((1.0 - ((double)ks.Ninwork / ks.N)) >= parametr / 100.0);
 }
 
 void selectFilterTruba(const vector<Truba>& Truboprovod, int i)
@@ -60,19 +58,18 @@ void selectFilterTruba(const vector<Truba>& Truboprovod, int i)
 	{
 	case 1:
 	{
-		bool f = false;
 		cout << "Введи название трубы\n";
 		string name;
 		cin.get();
 		getline(cin, name);
-		for (auto& i : SearchTrubaByFilter(Truboprovod, SearchTrubaByName, name))
-		{
-			cout << Truboprovod[i];
-			f = true;
-		}
-		if (!f)
+		auto res = SearchTrubaByFilter(Truboprovod, SearchTrubaByName, name);		
+		if (res.size()==0)
 		{
 			cout << "Нет труб с таким названием\n";
+		}
+		for (auto& i : res)
+		{
+			cout << Truboprovod[i];
 		}
 		break;
 
@@ -148,12 +145,6 @@ void selectFilterKS(const vector<KS>& Zavod, int i)
 
 void changeTrubaSostoyanie(vector<Truba>& Truboprovod, int i)
 {
-	cout << "Варианты редактирования:\n";
-	cout << "1-Отправить все трубы в ремонт\n";
-	cout << "2-Отправить конкретные трубы в ремонт\n";
-	cout << "3-Починить все трубы\n";
-	cout << "4-Починить конкретные трубы\n";
-	int i = getint("Введите вариант редактирования", 1, 4);
 	switch (i)
 	{
 	case 1:

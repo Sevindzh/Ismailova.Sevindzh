@@ -15,7 +15,7 @@ T getint(string text, T border1, T border2)
 	{
 		cout << text << endl;
 		cin >> value;
-		if (cin.fail() || value < border1 || value < border2)
+		if (cin.fail() || value < border1 || value > border2)
 		{
 			cin.clear();
 			cin.ignore(32767, '\n');
