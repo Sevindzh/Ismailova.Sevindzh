@@ -46,7 +46,8 @@ void Truba::savefileTruba(std:: ofstream& fout) // Сохранение информации о трубе
 void Truba::inputfileTruba(std::ifstream& fin) // Считывание информации о трубе
 {
 	fin >> id;
-	fin >> name;
+	fin.get();
+	getline(fin, name);
 	fin >> dlina;
 	fin >> diametr;
 	fin >> sostoyanie;

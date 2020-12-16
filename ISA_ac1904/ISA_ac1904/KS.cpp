@@ -46,7 +46,8 @@ void KS::savefileKS(std::ofstream& fout) // Сохранение информации о компрессорно
 void KS::inputfileKS(std::ifstream& fin) // Считывание информации о компрессорной станции
 {
 	fin >> id;
-	fin >> name;
+	fin.get();
+	getline(fin, name);
 	fin >> N;
 	fin >> Ninwork;
 	fin >> effect;
