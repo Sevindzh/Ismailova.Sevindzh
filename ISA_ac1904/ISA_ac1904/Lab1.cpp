@@ -12,13 +12,13 @@ using namespace std;
 
 Truba& selectTruba(vector<Truba>& Truboprovod) // Выбор трубы
 {
-	unsigned int index = getint("Введите номер трубы", (size_t)1u, Truboprovod.size());
+	unsigned int index = getint("Введи номер трубы", (size_t)1u, Truboprovod.size());
 	return Truboprovod[index - 1];
 }
 
 void deleteTruba(vector<Truba>& Truboprovod) // Удаление трубы
 {
-	unsigned int index = getint("Введите номер трубы", (size_t)1u, Truboprovod.size());
+	unsigned int index = getint("Введи номер трубы", (size_t)1u, Truboprovod.size());
 	Truboprovod.erase(Truboprovod.begin() + index - 1);
 }
 
@@ -40,7 +40,7 @@ KS& selectKS(vector<KS>& Zavod) // Выбор компрессорной станции
 
 void deleteKS(vector<KS>& Zavod) // Удаление компрессорной станции
 {
-	unsigned int index = getint("Введите номер трубы", (size_t)1u, Zavod.size());
+	unsigned int index = getint("Введи номер трубы", (size_t)1u, Zavod.size());
 	Zavod.erase(Zavod.begin() + index - 1);
 }
 
@@ -61,7 +61,7 @@ void selectFilterTruba(const vector<Truba>& Truboprovod, int i)
 	case 1:
 	{
 		bool f = false;
-		cout << "Введите название трубы\n";
+		cout << "Введи название трубы\n";
 		string name;
 		cin.get();
 		getline(cin, name);
@@ -94,7 +94,7 @@ void selectFilterTruba(const vector<Truba>& Truboprovod, int i)
 	}
 	default:
 	{
-		cout << "Данные введены не корректно. Попробуйте ещё раз.\n";
+		cout << "Данные введены не корректно. Попробуй ещё раз.\n";
 	}
 	}
 }
@@ -106,7 +106,7 @@ void selectFilterKS(const vector<KS>& Zavod, int i)
 	case 1:
 	{
 		bool f = false;
-		cout << "Введите название компрессорной станции\n";
+		cout << "Введи название компрессорной станции\n";
 		string name;
 		cin.get();
 		getline(cin, name);
@@ -125,7 +125,7 @@ void selectFilterKS(const vector<KS>& Zavod, int i)
 	case 2:
 	{
 		bool f = false;
-		double procent = getint("Введите процент незадействованных цехов", 1, 100);
+		double procent = getint("Введит процент незадействованных цехов", 1, 100);
 		for (auto& i : SearchKSByFilter(Zavod, SearchKSByNnowork, procent))
 
 		{
@@ -140,7 +140,7 @@ void selectFilterKS(const vector<KS>& Zavod, int i)
 	}
 	default:
 	{
-		cout << "Данные введены не корректно. Попробуйте ещё раз.\n";
+		cout << "Данные введены не корректно. Попробуй ещё раз.\n";
 	}
 	}
 }
@@ -170,10 +170,10 @@ void changeTrubaSostoyanie(vector<Truba>& Truboprovod, int i)
 	}
 	case 2:
 	{
-		int coutt = getint("Введите количество труб", (size_t)1, Truboprovod.size());
+		int coutt = getint("Введи количество труб", (size_t)1, Truboprovod.size());
 		while (coutt--)
 		{
-			int n = getint("Введите номер трубы", (size_t)1, Truboprovod.size());
+			int n = getint("Введи номер трубы", (size_t)1, Truboprovod.size());
 			if (Truboprovod[n].sostoyanie == true)
 			{
 				Truboprovod[n].editTruba();
@@ -194,10 +194,10 @@ void changeTrubaSostoyanie(vector<Truba>& Truboprovod, int i)
 	}
 	case 4:
 	{
-		int countt = getint("Введите количество труб", (size_t)1, Truboprovod.size());
+		int countt = getint("Введи количество труб", (size_t)1, Truboprovod.size());
 		while (countt--)
 		{
-			int n = getint("Введите номер трубы", (size_t)1, Truboprovod.size());
+			int n = getint("Введи номер трубы", (size_t)1, Truboprovod.size());
 			if (Truboprovod[n].sostoyanie == false)
 			{
 				Truboprovod[n].editTruba();
@@ -237,7 +237,7 @@ int main()
 	{
 		printmenu();
 		int i;
-		i = getint("Введите номер действия", 0, 10000);
+		i = getint("Введи номер действия", 0, 10000);
 		switch (i)
 		{
 		case 1:
@@ -285,7 +285,7 @@ int main()
 			}
 			else
 			{
-				cout << "Труба или Компрессорная станция не создана. Попробуйте ещё раз.\n";
+				cout << "Труба или компрессорная станция не создана. Попробуй ещё раз.\n";
 				break;
 			}
 		}
@@ -298,7 +298,7 @@ int main()
 				cout << "2-Отправить конкретные трубы в ремонт\n";
 				cout << "3-Починить все трубы\n";
 				cout << "4-Починить конкретные трубы\n";
-				int i = getint("Введите вариант редактирования", 1, 4);
+				int i = getint("Введи вариант редактирования", 1, 4);
 				changeTrubaSostoyanie(Truboprovod, i);
 				break;
 			}
@@ -317,7 +317,7 @@ int main()
 			}
 			else
 			{
-				cout << "Компрессорная станция не создана. Попробуйте ещё раз.\n";
+				cout << "Компрессорная станция не создана. Попробуй ещё раз.\n";
 				break;
 			}
 		}
@@ -351,7 +351,7 @@ int main()
 			}
 			else
 			{
-				cout << "Труба или Компрессорная станция не создана. Попробуйте ещё раз.\n";
+				cout << "Труба или компрессорная станция не создана. Попробуй ещё раз.\n";
 				break;
 			}
 		}
@@ -392,7 +392,7 @@ int main()
 			cout << "Фильтры:\n";
 			cout << "1-По имени\n";
 			cout << "2-По состоянию в ремонте\n";
-			i = getint("Введите номер фильтра", 1, 2);
+			i = getint("Введи номер фильтра", 1, 2);
 			selectFilterTruba(Truboprovod, i);
 			break;
 		}
@@ -401,7 +401,7 @@ int main()
 			cout << "Фильтры:\n";
 			cout << "1-По имени\n";
 			cout << "2-По проценту незадействованых цехов\n";
-			i = getint("Введите номер фильтра", 1, 2);
+			i = getint("Введи номер фильтра", 1, 2);
 			selectFilterKS(Zavod, i);
 			break;
 		}
@@ -421,7 +421,7 @@ int main()
 		}
 		default:
 		{
-			cout << "Данные введены не корректно. Попробуйте ещё раз.";
+			cout << "Данные введены не корректно. Попробуй ещё раз.";
 		}
 		}
 	}

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 class KS
 {
@@ -20,7 +21,7 @@ public:
 		friend std::istream& operator >> (std::istream& in, KS& ks); // Создание компрессорной станции
 		friend std::ostream& operator << (std::ostream& out, const KS& ks); // Вывод информации о компрессорной станции
 		void editKS(); // Изменение цехов в работe
- 		friend void savefileKS(std::ofstream& fout); // Сохранение информации о компрессорной станции
+ 		void savefileKS(std::ofstream& fout); // Сохранение информации о компрессорной станции
 		void inputfileKS(std::ifstream& fin); // Считывание инфы о компрессорной станции
 
 		/* static KS inputfileKS(std::ifstream& fin); // Считывание информации о компрессорной станции

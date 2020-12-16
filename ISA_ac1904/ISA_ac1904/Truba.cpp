@@ -11,7 +11,7 @@ unsigned int Truba::IDt = 0;
 istream& operator >> (istream& in, Truba& t) // Создание трубы
 {
 	t.id = ++Truba::IDt;
-	cout << "Введите название трубы\n";
+	cout << "Введи название трубы\n";
 	cin.get();
 	getline(cin, t.name);
 	t.dlina = getint("Введи длину трубы (Еденица измерения: м)", 1.0, 10000.0);
@@ -45,14 +45,12 @@ void Truba::savefileTruba(std:: ofstream& fout) // Сохранение информации о трубе
 }
 void Truba::inputfileTruba(std::ifstream& fin) // Считывание информации о трубе
 {
-	/* Truba t;
 	fin >> id;
 	fin >> name;
 	fin >> dlina;
 	fin >> diametr;
 	fin >> sostoyanie;
-	return t;
-	*/
+
 }
 
 /* Truba& selectTruba(vector<Truba>& Truboprovod) // Выбор трубы
