@@ -23,6 +23,9 @@ istream& operator >> (istream& in, Truba& t) // Создание трубы
 ostream& operator << (ostream& out, const Truba& t) // Вывод информации о трубе
 {
 	out << "Данные о трубе:\n";
+	out << "id рубы: " << t.id << endl;
+	out << "id входной компрессорной станции: " << t.inputks << endl;
+	out << "id выходной компрессорной станции: " << t.outputks << endl;
 	out << "Название трубы: " << t.name << endl;
 	out << "Длина трубы: " << t.dlina << " (м)" << endl;
 	out << "Диаметр турбы: " << t.diametr << " (мм)" << endl;
@@ -38,6 +41,8 @@ void Truba::editTruba() // Отправить трубу в ремонт
 void Truba::savefileTruba(std:: ofstream& fout) // Сохранение информации о трубе
 {
 	fout << id << endl;
+	fout << inputks << endl;
+	fout << outputks << endl;
 	fout << name << endl;
 	fout << dlina << endl;
 	fout << diametr << endl;
@@ -46,33 +51,45 @@ void Truba::savefileTruba(std:: ofstream& fout) // Сохранение информации о трубе
 void Truba::inputfileTruba(std::ifstream& fin) // Считывание информации о трубе
 {
 	fin >> id;
-	fin.get();
-	getline(fin, name);
+	fin >> inputks;
+	fin >> outputks;
+	fin >> name;
 	fin >> dlina;
 	fin >> diametr;
 	fin >> sostoyanie;
 
 }
 
-/* Truba& selectTruba(vector<Truba>& Truboprovod) // Выбор трубы
+std::string Truba::getname() // Возвращение названия
 {
-	unsigned int index = getint("Введите номер трубы", (size_t)1u, Truboprovod.size());
-	return Truboprovod[index - 1];
+	return name;
 }
 
-void deleteTruba(vector<Truba>& Truboprovod) // Удаление трубы
+bool Truba::getsostoyanie() // Возврщение состояния
 {
-	unsigned int index = getint("Введите номер трубы", (size_t)1u, Truboprovod.size());
-	Truboprovod.erase(Truboprovod.begin() + index - 1);
+	return sostoyanie;
 }
 
-bool SearchTrubaByName(const Truba& t, std::string parametr) // Поиск по названию
+unsigned int Truba::getid() // Возвращение id
 {
-	return t.name == parametr;
+	return id;
+}
+void Truba::setinputks(unsigned int value)
+{
+	inputks = value;
 }
 
-bool SearchTrubaBySostoyanie(const Truba& t, double parametr) // 
+void Truba::setoutputks(unsigned int value)
 {
-	return t.sostoyanie == parametr;
+	outputks = value;
 }
-*/
+
+unsigned int Truba::getinputks()
+{
+	return inputks;
+}
+
+unsigned int Truba::getoutputks()
+{
+	return outputks;
+}

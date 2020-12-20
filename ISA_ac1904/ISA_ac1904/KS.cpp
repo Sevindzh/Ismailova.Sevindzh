@@ -22,7 +22,8 @@ istream& operator >> (istream& in, KS& ks) // Создание компрессорной станции
 ostream& operator << (ostream& out, const KS& ks) // Вывод информации о компрессорной станции
 {
 	out << "Данные о компрессорной станции:\n";
-	out << "Имя компрессорной станции: " << ks.name << endl;
+	out << "id компрессорной станции: " << ks.id << endl;
+	out << "Название компрессорной станции: " << ks.name << endl;
 	out << "Количество цехов на компрессорной станции: " << ks.N << endl;
 	out << "Количество цехов в работе: " << ks.Ninwork << endl;
 	out << "Эффективность компрессорной станции: " << ks.effect << endl;
@@ -46,32 +47,28 @@ void KS::savefileKS(std::ofstream& fout) // Сохранение информации о компрессорно
 void KS::inputfileKS(std::ifstream& fin) // Считывание информации о компрессорной станции
 {
 	fin >> id;
-	fin.get();
-	getline(fin, name);
+	fin >> name;
 	fin >> N;
 	fin >> Ninwork;
 	fin >> effect;
 }
 
-/* KS& selectKS(vector<KS>& Zavod) // Выбор компрессорной станции
+std::string KS::getname()
 {
-	unsigned int index = getint("Введите номер компрессорной станции", (size_t)1u, Zavod.size());
-	return Zavod[index - 1];
+	return name;
 }
 
-void deleteKS(vector<KS>& Zavod) // Удаление компрессорной стации
+int KS::getN()
 {
-	unsigned int index = getint("Введите номер компрессорной станции", (size_t)1u, Zavod.size());
-	Zavod.erase(Zavod.begin() + index - 1);
+	return N;
 }
 
-bool SearchKSByName(const KS& ks, std::string parametr) // Поиск по названию
+int KS::getNinwork()
 {
-	return ks.name == parametr;
+	return Ninwork;
 }
 
-bool SearchKSByNinwork(const KS& ks, double parametr) // Поиск не работающих цехов по %
+unsigned int KS::getid()
 {
-	return 1 - ks.n / ks.Ninwork >= parametr;
+	return id;
 }
-*/

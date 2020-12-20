@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gts.cpp" />
     <ClCompile Include="KS.cpp" />
     <ClCompile Include="Lab1.cpp" />
     <ClCompile Include="Truba.cpp" />
     <ClCompile Include="ut.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gts.h" />
     <ClInclude Include="KS.h" />
     <ClInclude Include="Truba.h" />
     <ClInclude Include="ut.h" />

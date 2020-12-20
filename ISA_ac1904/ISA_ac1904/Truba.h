@@ -4,29 +4,28 @@
 
 class Truba
 {
-	static unsigned int IDt;
 	unsigned int id; // Идентификатор
+	std::string name; // Название
 	double dlina; // Длина
 	int diametr; // Диаметр
-	
+	bool sostoyanie; // Состояние в ремонте или не в ремонте
+	unsigned int inputks = 0; // Компрессорная станция, от которой идёт труба
+	unsigned int outputks = 0; // Компрессорная станция, к которой идёт труба
 
 public:
-	/* static Truba createTruba(); // Создание трубы
-	friend void printTruba(const Truba& t); // Вывод информации о компрессорной станции
-	friend void editTruba(Truba& t); // Изменение цехов в работе */
 
-	std::string name; // Название
-	bool sostoyanie; // Состояние в ремонте или нет
-	friend std::istream& operator >> (std::istream& in, Truba& t); // Создание труба
-	friend std::ostream& operator << (std::ostream& out, const Truba& t); // Вывод информации о труба
+	static unsigned int IDt;
+	friend std::istream& operator >> (std::istream& in, Truba& t); // Создание трубы
+	friend std::ostream& operator << (std::ostream& out, const Truba& t); // Вывод информации о трубе
 	void editTruba(); // Отправить трубу в ремонт
-	void savefileTruba(std::ofstream& fout); // Сохранение информации о компрессорной станции
-	void inputfileTruba(std::ifstream& fin);
-
-	/* static Truba inputfileTruba(std::ifstream& fin); // Считывание информации о компрессорной станции
-	friend void selectTruba(vector<Truba>& Truboprovod); // Выбор трубы
-	friend void SearchTrubaByName(const Truba& t, std::string parametr); // Поиск по названию
-	friend void SearchTrubaBySostoyanie(const Truba& t, double parametr); // Поиск по состоянию
-	*/
+	void savefileTruba(std::ofstream& fout); // Сохранение информации о трубе
+	void inputfileTruba(std::ifstream& fin); // Считывание информации о трубе
+	std::string getname(); // Возвращение названия
+	bool getsostoyanie(); // Возврщение состояния
+	unsigned int getid(); // Возвращение id
+	void setinputks(unsigned int value); // Присваиваю номер компрессорной станции, от которой идёт труба
+	void setoutputks(unsigned int value);// Присваиваю номер компрессорной станции, к которой идёт труба
+	unsigned int getinputks(); // Возвращаю номер компрессорной станции, от которой идёт труба
+	unsigned int getoutputks(); // Возвращаю номер компрессорной станции, к которой идёт труба
 };
 
