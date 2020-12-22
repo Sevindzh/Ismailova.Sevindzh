@@ -12,6 +12,8 @@ class KS
 
 public:
 
+	float pometka = 0;
+	int pred;
 	static unsigned int IDks;
 	friend std::istream& operator >> (std::istream& in, KS& ks); // Создание компрессорной станции
 	friend std::ostream& operator << (std::ostream& out, const KS& ks);  // Вывод информации о компрессорной станции

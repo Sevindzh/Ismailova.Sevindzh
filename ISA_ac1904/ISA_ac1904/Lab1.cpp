@@ -48,9 +48,9 @@ void deleteKS(map<int, KS>& Zavod, gts& gts, map<int, Truba>& Truboprovod) // Уд
 	{
 		if (n.second.getinputks() == index)
 			n.second.setinputks(0);
-	}
+	/* }
 	for (auto& n : Truboprovod)
-	{
+	{ */
 		if (n.second.getoutputks() == index)
 			n.second.setoutputks(0);
 	}
@@ -235,145 +235,6 @@ void changeTrubaSostoyanie(map<int, Truba>& Truboprovod)
 	}
 }
 
-/* void editGTS(map<int, Truba>& Truboprovod, set<int>& idks, set<int>& idt)
-{
-	while (true)
-	{
-		cout << "1 - Соединить компрессорные станции\n";
-		cout << "0 - Выход\n";
-		int i = getint("Введи номер действия", 0, 1);
-		switch (i)
-		{
-		case 1:
-		{
-			unsigned int ks = getint("Введи номер первой копрессорной станции", 0u, KS::IDks);
-			idks.insert(ks);
-			unsigned int t;
-			while (true)
-			{
-				t = getint("Введи номер трубы, которая будет соединять компрессорные станции", 0u, Truba::IDt);
-				if (Truboprovod[t].getinputks() == 0 && Truboprovod[t].getoutputks() == 0)
-					break;
-				else
-					cout << "Эта труба уже задействована\n";
-			}
-			idt.insert(t);
-			Truboprovod[t].setinputks(ks);
-			ks = getint("Введи номер второй копрессорной станции", 0u, KS::IDks);
-			idks.insert(ks);
-			Truboprovod[t].setoutputks(ks);
-			break;
-		}
-		case 0:
-		{
-			return;
-		}
-		default:
-		{
-			cout << "Данные введены не корректно. Попробуй ещё раз.\n";
-		}
-		}
-	}
-}
-
-void savefilegts(ofstream& fout, set<int>& nabor)
-{
-	for (auto& n : nabor)
-	{
-		fout << n << endl;
-	}
-}
-
-int inputfilegts(ifstream& fin)
-{
-	unsigned int n;
-	fin >> n;
-	return n;
-}
-
-int** creatematrix(int n)
-{
-	int** matrix = new int* [n]();
-	for (int i = 0; i < n; i++)
-	{
-		matrix[i] = new int[n]();
-	}
-	return matrix;
-}
-
-void deletematrix(int** matrix, int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		delete[] matrix[i];
-	}
-	delete[] matrix;
-}
-
-void editmatrix(int** matrix, map<int, Truba>& Truboprovod, set<int>& idks)
-{
-	vector<unsigned int> sortedidks;
-	for (auto& v : idks)
-	{
-		sortedidks.push_back(v);
-	}
-	int n = idks.size();
-	for (auto& infotruba : Truboprovod)
-	{
-		int first = -1;
-		int second = -1;
-		for (int i = 0; i < n; i++)
-		{
-			if (infotruba.second.getinputks() == sortedidks[i])
-				first = i;
-		}
-		for (int i = 0; i < n; i++)
-		{
-			if (infotruba.second.getoutputks() == sortedidks[i])
-				second = i;
-		}
-		if (first > -1 && second > -1)
-			matrix[first][second] = 1;
-	}
-}
-
-vector<unsigned int> tgtssort(map<int, Truba>& Truboprovod, set<int>& idks, set<int>& idt)
-{
-	vector<unsigned int> sorted;
-	vector<unsigned int> vks;
-	for (auto& v : idks)
-	{
-		vks.push_back(v);
-	}
-	int n = idks.size();
-	int** smmatrix = creatematrix(n);
-	editmatrix(smmatrix, Truboprovod, idks);
-	for (int k = 0; k < n; k++)
-	{
-		for (int i = 0; i < n; i++)
-		{
-			int sum = 0;
-			for (int j = 0; j < n; j++)
-			{
-				sum += smmatrix[i][j];
-			}
-			if (sum == 0)
-			{
-				sorted.push_back(vks[i]);
-				for (int j = 0; j < n; j++)
-				{
-					smmatrix[j][i] = 0;
-				}
-				smmatrix[i][i] = 1;
-			}
-		}
-	}
-	
-	deletematrix(smmatrix, n);
-	reverse(sorted.begin(), sorted.end());
-	return sorted;
-}
-*/
 
 void printmenu()
 {
@@ -390,6 +251,8 @@ void printmenu()
 	cout << "11 - Удалить компрессорную станцию\n";
 	cout << "12 - Соединение в единую газотранспортную сеть\n";
 	cout << "13 - Выполнить топологическую сортировку\n";
+	cout << "14 - Найти максимальный поток между компрессорными станциями\n";
+	cout << "15 - Найти кратчайший путь между компрессорными станциями\n";
 	cout << "0 - Выход\n";
 }
 int main()
@@ -652,14 +515,27 @@ int main()
 				cout << "В графе присутствует цикл => топологическая сортировка невозможна\n";
 			break;
 		}
-
+		case 14:
+		{
+			float max = gts.maxpotok(Truboprovod, Zavod);
+			cout << "Максимальный поток между компрессорными станциями равен\n";
+			cout << max << endl;
+			break;
+		}
+		case 15:
+		{
+			float max = gts.minpyt(Truboprovod, Zavod);
+			cout << "Минимальный путь между компрессорными станциями равен\n";
+			cout << max << endl;
+			break;
+		}
 		case 0:
 		{
 			return 0;
 		}
 		default:
 		{
-			cout << "Данные введены не корректно. Попробуй ещё раз.";
+			cout << "Данные введены не корректно. Попробуй ещё раз.\n";
 		}
 		}
 	}

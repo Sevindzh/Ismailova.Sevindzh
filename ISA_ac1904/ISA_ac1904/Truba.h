@@ -11,6 +11,7 @@ class Truba
 	bool sostoyanie; // Состояние в ремонте или не в ремонте
 	unsigned int inputks = 0; // Компрессорная станция, от которой идёт труба
 	unsigned int outputks = 0; // Компрессорная станция, к которой идёт труба
+	int proizv;
 
 public:
 
@@ -27,5 +28,7 @@ public:
 	void setoutputks(unsigned int value);// Присваиваю номер компрессорной станции, к которой идёт труба
 	unsigned int getinputks(); // Возвращаю номер компрессорной станции, от которой идёт труба
 	unsigned int getoutputks(); // Возвращаю номер компрессорной станции, к которой идёт труба
+	int getproizv();
+	double getdlina();
 };
 
